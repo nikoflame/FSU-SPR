@@ -6,12 +6,14 @@
 
 namespace Helper
 {
+	//clears the std::cin buffer
 	void clrcin()
 	{
 		std::cin.clear();
 		std::cin.ignore();
 	}
 
+	//sends a message to the user and asks for input, then validates that input to be legal and within range if needed
 	int GetValidatedInt(const char* strMessage, int nMinimumRange = 0, int nMaximumRange = 0)
 	{
 		int userInput;
@@ -56,6 +58,7 @@ namespace Helper
 		return userInput;
 	}
 
+	//same as above, but for float instead of int
 	float GetValidatedFloat(const char* strMessage, float fMinimumRange = 0.0f, float fMaximumRange = 0.0f) {
 		float userInput;
 
@@ -98,12 +101,14 @@ namespace Helper
 		return userInput;
 	}
 
+	//returns a random integer between min and max values
 	int RandomInt(int min, int max)
 	{
 		srand(time(NULL));
 		return rand() % (max - min + 1) + min;
 	}
 
+	//outputs an array of strings into a numbered menu, with a title, then asks the user to choose one and validates their response
 	int MenuAndChoice(const char* menuTitle, const std::string menu[], int menuSize)
 	{
 		//print menu
@@ -118,6 +123,7 @@ namespace Helper
 		return choice;
 	}
 
+	//converts an integer to binary, hex, or oct using std::cout to the console
 	void PrintBinHexOct(int intToChange, bool binary, bool hex, bool oct)
 	{
 		if (binary && !hex && !oct)
@@ -138,6 +144,7 @@ namespace Helper
 		}
 	}
 
+	//takes an array of characters and copies it to another array of characters
 	void CopyString(const char* source, char*& destination)
 	{
 		delete[] destination;
