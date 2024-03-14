@@ -6,6 +6,6 @@ class CheckingAccount :
 public:
     void Withdraw(float amount);
 
-    bool isWithdrawalLimitReached();
+    bool isWithdrawalLimitReached(); //checks if user is at 10 withdrawals in order to charge a fee for more
 };
 

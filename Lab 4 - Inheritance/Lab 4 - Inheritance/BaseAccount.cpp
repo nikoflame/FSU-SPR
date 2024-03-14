@@ -2,6 +2,7 @@
 
 void BaseAccount::Withdraw(float amount)
 {
+	//check if withdrawal is legal. cannot withdraw nothing.
 	if (amount > 0.0f)
 	{
 		mAccountBalance -= amount;
@@ -16,6 +17,7 @@ float BaseAccount::GetBalance() const
 
 void BaseAccount::Deposit(float amount)
 {
+	//check if deposit is legal. cannot deposit nothing.
 	if (amount > 0.0f)
 	{
 		mAccountBalance += amount;

@@ -6,6 +6,6 @@ class SavingsAccount :
 public:
     void Withdraw(float amount);
 
-    bool isWithdrawalLimitReached();
+    bool isWithdrawalLimitReached(); //checks if limit of 3 withdrawals per day has been reached
 };
 
