@@ -2,13 +2,14 @@
 
 void SavingsAccount::Withdraw(float amount)
 {
-	if (this->isWithdrawalLimitReached())
+	if (this->isWithdrawalLimitReached()); //do nothing here
+	else
 		BaseAccount::Withdraw(amount);
 }
 
 bool SavingsAccount::isWithdrawalLimitReached()
 {
-	if (mWithdrawals < 3) //if equal to 3, this is withdrawal number 4
+	if (mWithdrawals >= 3) //if equal to 3, this is withdrawal number 4
 		return true;
 	else
 		return false;

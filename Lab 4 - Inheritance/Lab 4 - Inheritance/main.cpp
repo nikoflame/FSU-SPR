@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
 #include "CreditAccount.h"
@@ -49,11 +50,45 @@ int main()
     BaseAccount* mySavings = new SavingsAccount();
     BaseAccount* myCredit = new CreditAccount();
 
-    //set balances
-    myChecking->SetBalance(1000.0f);
-    mySavings->SetBalance(10000.0f);
-    myCredit->SetBalance(0.0f);
+    //LAB 5 - Binary File I/O ----- START
+ 
+    //open file
+    std::fstream fin;
+    fin.open("Balances.bin", std::ios_base::in | std::ios_base::binary);
 
+    //check if file exists
+    if (fin.is_open())
+    {
+        //calculate size
+        fin.seekg(0, std::ios_base::end);
+        int fSize = fin.tellg();
+        fin.seekg(0, std::ios_base::beg);
+
+        //create variables
+        float checkingBal, savingsBal, creditBal;
+
+        //read file
+        fin.read((char*)&checkingBal, sizeof(float));
+        fin.read((char*)&savingsBal, sizeof(float));
+        fin.read((char*)&creditBal, sizeof(float));
+
+        //set balances
+        myChecking->SetBalance(checkingBal);
+        mySavings->SetBalance(savingsBal);
+        myCredit->SetBalance(creditBal);
+
+        //close file
+        fin.close();
+    }
+    else
+    {
+        //set balances to default
+        myChecking->SetBalance(1000.0f);
+        mySavings->SetBalance(10000.0f);
+        myCredit->SetBalance(0.0f);
+    }
+    //LAB 5 - Binary File I/O ----- END
+    
     //menu initializations
     const std::string menu[7] =
     {
@@ -252,6 +287,31 @@ int main()
         system("pause");
 
     } while (menuChoice != 7); //loop unless user chooses to exit
+
+    //LAB 5 - Binary File I/O ----- START
+
+    //open file
+    std::fstream fout;
+    fout.open("Balances.bin", std::ios_base::out | std::ios_base::binary);
+
+    //write to file using binary
+    if (fout.is_open())
+    {
+        //create variables
+        float checkingBal = myChecking->GetBalance();
+        float savingsBal = mySavings->GetBalance();
+        float creditBal = myCredit->GetBalance();
+
+        //write out each account balance
+        fout.write((char*)&checkingBal, sizeof(float));
+        fout.write((char*)&savingsBal, sizeof(float));
+        fout.write((char*)&creditBal, sizeof(float));
+
+        //close file
+        fout.close();
+    }
+
+     //LAB 5 - Binary File I/O ----- END
 
     //clean up memory here
     delete myChecking;
