@@ -1,1 +1,4 @@
 Write your debugging steps and thought process here (This is part of your grade)
+1. Tried to run it with the debugger to see what would happen -> memory in use: 1020 FAIL
+2. Started going through each and every file to see if I could find and fix any obvious errors.
+	2A. 
