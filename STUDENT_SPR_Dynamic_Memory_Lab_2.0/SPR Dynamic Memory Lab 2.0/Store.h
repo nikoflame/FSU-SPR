@@ -9,4 +9,6 @@ class Store
 public:
 	Store();
 	void Print() const;
+	//void CleanUp();
+	~Store();
 };

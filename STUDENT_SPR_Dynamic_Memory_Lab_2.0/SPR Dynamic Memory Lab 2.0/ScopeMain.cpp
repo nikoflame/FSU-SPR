@@ -19,4 +19,6 @@ void ScopeMain()
 
 	Store* s = new Store();
 	s->Print();
+	//s->CleanUp();
+	delete s;
 }

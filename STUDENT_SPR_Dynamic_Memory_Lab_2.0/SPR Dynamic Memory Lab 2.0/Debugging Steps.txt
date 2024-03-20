@@ -1,4 +1,38 @@
 Write your debugging steps and thought process here (This is part of your grade)
 1. Tried to run it with the debugger to see what would happen -> memory in use: 1020 FAIL
-2. Started going through each and every file to see if I could find and fix any obvious errors.
-	2A. 
+
+2. I started going through each and every file to see if I could find and fix any obvious errors:
+
+	2A. In 'Inventory.h' the Print() method creates a 'new' 'size_t' object that needs to be deleted, so I deleted it.
+	2B. In 'Item.cpp' the contructor has the line 'm_Value = new int(_value);' written twice, so I deleted one.
+	2C. In 'Item.cpp' the Print() method creates a 'new' 'int' object that needs to be deleted, so I deleted it.
+	2D. In 'Store.cpp' the contructor has the line 'Item* helperItem = new Item("DEFAULT", 10);' which is not used, so I deleted it.
+	2E. In 'ScopeMain.cpp' the ScopeMain() method creates new 'new' 'Store' object that needs to be deleted so I deleted it.
+
+3. After that, I looked around at what the program is actually doing, and discovered that it is creating a 'new' 'Store' object and calling print on it. That is all the program does.
+
+4. Before using the memory leak detector, I decided to see what else could be causing leaks in the creation of a single 'Store' object:
+	
+	4A. First, the Store() constructor assigns the Inventory* m_Inventories pointer to point to a 'new' 'Inventory[3]'. What does that do?
+	4B. That's an array of 'Inventory' objects that has 3 spots in it. What do the Inventory objects do?
+	4C. The Inventory() constructor calls the CreateItem() method three times. What does that do?
+	4B. That pushes back a 'new' 'Item' object to the 'std::vector<Item*> m_Items' vector of 'Item' pointers. What does the Item() constructor do?
+	4D. The Item() constructor creates a 'new' 'int' object and assigns it to the 'int* m_Value' pointer to be pointed at.
+
+5. Now I need to get my thoughts in order and do some math:
+
+	5A. There is one 'Store' which has already been deleted with step 2E.
+	5B. There is one array of 'Inventory' objects which needs to be deleted.
+	5C. There are 3 'Item' objects in each 'Inventory'. Since the array is a size of 3, there are a total of 9 'Item' objects which need to be deleted.
+
+6. The only way to delete these objects are to find a way to access them. I made a CleanUp() method in each class that cleans itself up
+and calls the CleanUp() method of the next lower class, then called CleanUp() in 'ScopeMain.cpp'.
+
+7. I ran the debugger again -> memory in use: 408 FAIL
+
+8. I realized I need to make destructors instead of CleanUp() methods, so I deleted the methods and made destructors instead.
+
+9. I ran the debugger again -> memory in use: 0 PASS
+
+10. I'm going to be honest, I thought I would need to use the memory leak detector, but this was very easy to do without it. I hope that I 
+do not get points off for not using it. I'm sure it will come in handy in a more difficult situation in the future!

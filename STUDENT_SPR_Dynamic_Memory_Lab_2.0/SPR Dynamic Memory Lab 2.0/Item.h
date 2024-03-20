@@ -14,4 +14,6 @@ class Item
 public:
 	Item(const char* _name, int _value);
 	void Print() const;
+	//void CleanUp();
+	~Item();
 };

@@ -32,5 +32,23 @@ public:
 		{
 			m_Items[i]->Print();
 		}
+		delete nSize;
+	}
+
+	//void CleanUp()
+	//{
+	//	for (int i = 0; i < m_Items.size(); i++)
+	//	{
+	//		this->m_Items[i]->CleanUp();
+	//		delete m_Items[i];
+	//	}
+	//}
+
+	~Inventory()
+	{
+		for (int i = 0; i < m_Items.size(); i++)
+		{
+			delete m_Items[i];
+		}
 	}
 };
