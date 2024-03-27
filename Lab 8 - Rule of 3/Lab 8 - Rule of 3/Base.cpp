@@ -1,7 +1,7 @@
 #include "Base.h"
 #include "Helper.h"
 
-void Base::SetName(char* _name)
+void Base::SetName(const char* _name)
 {
 	Helper::CopyString(_name, mName);
 }

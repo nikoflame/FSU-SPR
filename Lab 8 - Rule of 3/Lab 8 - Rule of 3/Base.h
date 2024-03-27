@@ -9,7 +9,7 @@ private:
 public:
 	Base() {} //new empty default constructor
 
-	void SetName(char* _name);
+	void SetName(const char* _name);
 	char* GetName() { return mName; }
 
 	virtual void DisplayRecord() = 0;

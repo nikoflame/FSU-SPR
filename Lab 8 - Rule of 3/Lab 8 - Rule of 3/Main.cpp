@@ -40,15 +40,15 @@ int main()
         "Duplicate a record",
         "Exit"
     };
-    int choiceRecords = Helper::MenuAndChoice("Records Menu: ", menuRecords, 4);
-
-    //clear screen for selection
-    system("cls");
-
-    //switch for records menu
     bool exit = false;
     do
     {
+        int choiceRecords = Helper::MenuAndChoice("Records Menu: ", menuRecords, 4);
+
+        //clear screen for selection
+        system("cls");
+
+        //switch for records menu
         switch (choiceRecords)
         {
             case 1:
@@ -73,6 +73,9 @@ int main()
                 break;
             }
         }
+
+        //add some space
+        std::cout << std::endl;
     } while (!exit);
 
     //delete all records in the vector at the end of main
@@ -104,16 +107,12 @@ void AddRecord(std::vector<Base*>& _v)
 
         //set name
         std::cout << "What is their name? -> ";
-        char* _name = new char[100];
-        std::cin >> _name;
-        rec->SetName(_name);
-        delete[] _name;
+        std::string _name;
+        std::getline(std::cin, _name);
+        rec->SetName(_name.c_str());
 
         //set salary
-        std::cout << "What is their salary? -> ";
-        int _salary;
-        std::cin >> _salary;
-        rec->SetSalary(_salary);
+        rec->SetSalary(Helper::GetValidatedInt("What is their Salary? -> "));
 
         //add to vector
         _v.push_back(rec);
@@ -125,16 +124,12 @@ void AddRecord(std::vector<Base*>& _v)
 
         //set name
         std::cout << "What is their name? -> ";
-        char* _name = new char[100];
-        std::cin >> _name;
-        rec->SetName(_name);
-        delete[] _name;
+        std::string _name;
+        std::getline(std::cin, _name);
+        rec->SetName(_name.c_str());
 
         //set GPA
-        std::cout << "What is their GPA? -> ";
-        int _GPA;
-        std::cin >> _GPA;
-        rec->SetGPA(_GPA);
+        rec->SetGPA(Helper::GetValidatedFloat("What is their GPA? -> ", 0.0F, 4.0F));
 
         //add to vector
         _v.push_back(rec);
