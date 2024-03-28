@@ -29,6 +29,8 @@ int main()
     _CrtSetBreakAlloc(-1);
     //---------- Memory Leak Detection Code ----------//
 
+    std::cout << "----- Triangle Stuff -----" << std::endl;
+
     //declare two TriangleStack variables
     TriangleStack a, b;
 
@@ -46,7 +48,7 @@ int main()
     v.push_back(b);
 
     //loop through the vector and print each triangle’s area to the screen
-    std::cout << "----- TriangleStack -----" << std::endl;
+    std::cout << "\n----- TriangleStack -----" << std::endl;
     for (int i = 0; i < v.size(); i++)
         std::cout << "Area of triangle " << i+1 << ": " << v[i].GetArea() << std::endl;
 
@@ -72,11 +74,25 @@ int main()
     std::cout << "\n----- TriangleHeap -----" << std::endl;
     for (int i = 0; i < v2.size(); i++)
         std::cout << "Area of triangle " << i + 1 << ": " << v2[i].GetArea() << std::endl;
+    
+    //test the methods
+    std::cout << "\n\n----- Method Testing -----" << std::endl;
+    int* e = new int(1);
+    int* f = new int(2);
+    std::cout << "\n----- Numbers -----" << "\nint e: " << *e << "\nint f: " << *f << "\nAdded together: " << AddNumbersReturnInt(e, f) << std::endl;
+    SwapValues(e, f);
+    int* sum = new int(0);
+    std::cout << "\n----- Swapped -----" << "\nint e: " << *e << "\nint f: " << *f << "\nAdded together: ";
+    AddNumbersReturnVoid(*e, *f, sum);
+    std::cout << *sum << std::endl;
 
     //let me see what's happening
     system("pause");
 
     //exit gracefully
+    delete e;
+    delete f;
+    delete sum;
     return 0;
 }
 
