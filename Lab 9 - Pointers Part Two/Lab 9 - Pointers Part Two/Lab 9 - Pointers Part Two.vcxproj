@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab 9 - Pointers Part Two.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TriangleHeap.cpp" />
+    <ClCompile Include="TriangleStack.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TriangleHeap.h" />
+    <ClInclude Include="TriangleStack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
